@@ -14,7 +14,14 @@ CREATE TABLE users (
     email_verified_at TIMESTAMP,
     approved_at TIMESTAMP,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    status VARCHAR(20) DEFAULT 'Active',
+    status INT DEFAULT 3,
+    /*
+		status values
+        0	Block
+        1	Active
+        2	Not Approved
+        3	Not Verified
+    */
     type VARCHAR(15) NOT NULL
 );
 
