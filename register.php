@@ -49,6 +49,7 @@
             <h3 class="text-center">
                 Register                
             </h2>       
+            <hr/>
             <div class="form-group">
                     <input name="name" type="text" class="form-control" placeholder="Full Name" required="required">
                 </div>
