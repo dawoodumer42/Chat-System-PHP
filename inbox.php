@@ -1,6 +1,13 @@
 <html>
 <head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!------ Include the above in your HEAD tag ---------->
@@ -8,16 +15,13 @@
   <link href="chat_styles.css" rel="stylesheet">
 </head>
 <body>
+  <?php include('nav.php'); ?>
+  <br/>
+  
   <div class="container">
     <div class="messaging">
-      <div class="inbox_msg">
-        
+      <div class="inbox_msg">        
         <div class="inbox_people">
-          <div class="profile">
-              <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-              <a href="#"><h3 style="padding-left: 60px;">My Profile</h3></a>
-          </div>
-          <hr/>
           <div class="headind_srch">
             <div class="recent_heading">
               <h4>Recent</h4>
@@ -54,7 +58,28 @@
                 </div>
               </div>
             </div>
-            
+            <div class="chat_list">
+              <div class="chat_people">
+                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                <div class="chat_ib">
+                  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                  <p>Test, which is a new approach to have all solutions 
+                    astrology under one roof.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="chat_list">
+              <div class="chat_people">
+                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                <div class="chat_ib">
+                  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                  <p>Test, which is a new approach to have all solutions 
+                    astrology under one roof.
+                  </p>
+                </div>
+              </div>
+            </div>
             <div class="chat_list">
               <div class="chat_people">
                 <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
@@ -137,9 +162,6 @@
           </div>
         </div>
       </div>
-      
-      
-      
     </div>
   </div>
 </body>
