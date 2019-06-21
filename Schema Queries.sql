@@ -22,7 +22,7 @@ CREATE TABLE users (
         2	Not Approved
         3	Not Verified
     */
-    type VARCHAR(15) NOT NULL
+    type VARCHAR(15) NOT NULL DEFAULT 'User'
 );
 
 CREATE TABLE messages (

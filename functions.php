@@ -7,21 +7,38 @@ open_session($user_id, $type, $status){
     $_SESSION['status'] = $status;
 }
 
-authorize(){
+authorize($current_page){
     session_start();
-    var type = $_SESSION['type'];
-    switch(type){
+    $status = $_SESSION['status'];
+    $type = $_SESSION['type'];
+    $url = "";
+    $url2 = "";
+    switch($status){
         case 0:
+            $url = "blocked.php";
         break;
         case 1:
+            if($type == 'User')
+                $url = 'inbox.php';
+            else if ($type == 'Moderator')
+                $url = 'inbox.php';
+            else if ($type == 'Admin')
+            {
+                $url = "inbox.php";
+                $url2 = "users.php";
+            }
         break;
         case 2:
+            $url = "approval_message.php";
         break;
         case 3:
-        break;:
-        default:
+            $url = "verify.php";
         break;
     }
+    if($current_page != $url && $current_page != $url2)
+        header('Location: '.$url);
+
+    return;
 }
 
 
