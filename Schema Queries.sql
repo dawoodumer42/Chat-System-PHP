@@ -10,7 +10,8 @@ CREATE TABLE users (
     email VARCHAR(35) NOT NULL UNIQUE,
     password VARCHAR(60) NOT NULL,
     name VARCHAR(30) NOT NULL,
-    verified_at TIMESTAMP,
+    avtivation_code VARCHAR(60) NOT NULL,
+    email_verified_at TIMESTAMP,
     approved_at TIMESTAMP,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     type VARCHAR(15) NOT NULL
