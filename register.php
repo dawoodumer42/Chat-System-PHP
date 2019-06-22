@@ -1,3 +1,85 @@
+<?php
+	authorize('register.php');
+	$error_message = "";
+	if($_SERVER["REQUEST_METHOD"] == "POST") {
+		
+		// establishing connection
+		$connection = new mysqli("localhost", "root", "", "chat_system");
+
+		if($connection->connect_error) {
+			die("Server error, try again later!");
+		}
+		
+		$mail_check = "SELECT id FROM users WHERE email = '" .$_POST["email"]. "'";
+		
+		$result = $connection->query($mail_check);
+		
+		if($result->num_rows > 0) {
+			
+			$error_message = "This email has already been registered.";
+			
+		}
+		else {
+			
+			
+
+			$code = password_hash(date('Y-m-d H:i:s'), PASSWORD_DEFAULT);
+			$encrypted_password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+			
+			// query to insert new value
+			$insertQuery = "INSERT INTO
+				users(email, password, name, activation_code)
+				VALUES('" . $_POST["email"] . "' , '" . $encrypted_password . 
+				"' , '" . $_POST["name"] . "' , '" .$code . "')";
+			
+			
+			
+			
+			if($connection->query($insertQuery) === true) {
+				
+				
+				$user_query = "SELECT id, status, type FROM users
+					WHERE email = '" .$_POST["email"]. "'";
+				
+				$query_res = $connection->query($user_query);
+				
+				$row = $query_res->fetch_assoc();
+				
+				require_once "functions.php";
+				
+				
+				open_session($row["id"], $row["status"], $row["type"]);
+				
+				
+				echo $_SESSION["user_id"]; // = $row["id"];
+				echo $_SESSION["status"];  // = $row["status"];
+				echo $_SESSION["type"]; // = $row["type"];
+				
+				
+				//header('Location: welcome.php');
+				exit();
+				
+			}
+			else
+			{
+				
+				$error_message = "Something has gone wrong in the registration process.";
+				
+			}
+		}
+		
+		$connection->close();
+			
+			
+	
+
+	}
+
+    
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +134,7 @@
             <hr/>
             <div class="form-group">
                     <input name="name" type="text" class="form-control" placeholder="Full Name" required="required">
-                </div>
+            </div> 
             <div class="form-group">
                 <input name="email" type="email" class="form-control" placeholder="Email" required="required">
             </div>
@@ -65,7 +147,9 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block">Register</button>
             </div>
-            <p class="text-danger text-red" id="error"> </p>
+            <p class="text-danger text-red" id="error">
+				<?php echo $error_message; ?>
+			</p>
             <div class="clearfix">
                 <!-- <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label> -->
                 <!-- <a href="#" class="pull-right">Forgot Password?</a> -->

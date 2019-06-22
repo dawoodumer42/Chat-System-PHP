@@ -1,3 +1,48 @@
+
+
+<?php
+	
+	$error_message = "";
+	
+	session_start();
+	if(isset($_SESSION["user_id"])) {
+		
+		
+		header('Location: welcome.php');
+		exit();
+		
+	}
+	else {
+		
+		$conn = new mysqli("localhost", "root", "", "chat_system");
+		
+		if($conn->connect_error) {
+			
+			$error_message = "There is some server problem. Please, try again later!";
+			
+		}
+		else {
+			
+			$sql_query = "SELECT * FROM users WHERE email = '" . $_POST["email"] . "'";
+			
+			$res = $conn->query($sql_query);
+			
+			if($res->num_rows > 0) {
+				
+				
+			}
+			
+		}
+		
+	}
+	
+	
+
+?>
+	
+  
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

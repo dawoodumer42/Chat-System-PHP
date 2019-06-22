@@ -10,9 +10,9 @@ CREATE TABLE users (
     email VARCHAR(35) NOT NULL UNIQUE,
     password VARCHAR(60) NOT NULL,
     name VARCHAR(30) NOT NULL,
-    avtivation_code VARCHAR(60) NOT NULL,
-    email_verified_at TIMESTAMP,
-    approved_at TIMESTAMP,
+    activation_code VARCHAR(60) NOT NULL,
+    email_verified_at TIMESTAMP NULL DEFAULT NULL,
+    approved_at TIMESTAMP NULL DEFAULT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     status INT DEFAULT 3,
     /*
