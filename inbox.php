@@ -21,6 +21,73 @@
   <div class="container">
     <div class="messaging">
       <div class="inbox_msg">        
+        <div class="users_list">
+        <div class="headind_srch1">
+            <div class="recent_heading1">
+              <h4>All Users</h4>
+            </div>
+            <div class="recent_heading1">
+              <h4>Rooms</h4>
+              
+            </div>
+          </div>
+          <div class="chat_list active_chat">
+            <div class="chat_people">
+              <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="chat_ib">
+                <h5>Sunil Rajput <span class="chat_date">Online</span></h5>
+              </div>
+            </div>
+          </div>
+          <div class="chat_list">
+            <div class="chat_people">
+              <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="chat_ib">
+                <h5>Sunil Rajput <span class="chat_date">Online</span></h5>
+              </div>
+            </div>
+          </div>
+          <div class="chat_list">
+            <div class="chat_people">
+              <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="chat_ib">
+                <h5>Sunil Rajput <span class="chat_date">Online</span></h5>
+              </div>
+            </div>
+          </div>
+          <div class="chat_list">
+            <div class="chat_people">
+              <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="chat_ib">
+                <h5>Sunil Rajput <span class="chat_date">Online</span></h5>
+              </div>
+            </div>
+          </div>
+          <div class="chat_list">
+            <div class="chat_people">
+              <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="chat_ib">
+                <h5>Sunil Rajput <span class="chat_date">Online</span></h5>
+              </div>
+            </div>
+          </div>
+          <div class="chat_list">
+            <div class="chat_people">
+              <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="chat_ib">
+                <h5>Sunil Rajput <span class="chat_date">Online</span></h5>
+              </div>
+            </div>
+          </div>
+          <div class="chat_list">
+            <div class="chat_people">
+              <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="chat_ib">
+                <h5>Sunil Rajput <span class="chat_date">Online</span></h5>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="inbox_people">
           <div class="headind_srch">
             <div class="recent_heading">
