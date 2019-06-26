@@ -1,31 +1,22 @@
 <?php
+    include('functions.php');
+    authorize();
 
-function get_all_users() {
-    $con = mysqli_connect("localhost","root","","chat_system");
-
-    // Check connection
-    if (mysqli_connect_errno())
-    {
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-    }
-
-    $sql="SELECT id, name, email, created_at, status, type FROM users";
-
-    if ($result=mysqli_query($con,$sql))
-    {
-        while($row=mysqli_fetch_row($result)) {
-            $user = new stdClass();
-            $user->id = $row[0];
-            $user->name = $row[1];
-            $user->email = $row[2];
-            $user->joined = $row[3];
-            $user->actions = "";   
+    $user_rows = get_all_users();
+    //var_dump($users);
+    foreach($user_rows as $row) {
+        $user = new stdClass();
+        $user->id = $row[0];
+        $user->name = $row[1];
+        $user->email = $row[2];
+        $user->joined = $row[3];
+        $user->actions = "";   
             
-            $action_approve = "<a href=\"#\" class=\"view\" title=\"Approve\" data-toggle=\"tooltip\"><span class=\"badge badge-success\">Approve</span></a>\n";
-            $action_block = "<a href=\"#\" class=\"view\" title=\"Danger\" data-toggle=\"tooltip\"><span class=\"badge badge-danger\">Block</span></a>\n";
-            $action_unblock = "<a href=\"#\" class=\"view\" title=\"Unblock\" data-toggle=\"tooltip\"><span class=\"badge badge-success\">Unblock</span></a>\n";
+        $action_approve = "<a href=\"approve.php?user_id=$user->id\" class=\"view\" title=\"Approve\" data-toggle=\"tooltip\"><span class=\"badge badge-info\">Approve</span></a>\n";
+        $action_block = "<a href=\"block.php?user_id=$user->id\" class=\"view\" title=\"Danger\" data-toggle=\"tooltip\"><span class=\"badge badge-danger\">Block</span></a>\n";
+        $action_unblock = "<a href=\"unblock.php?user_id=$user->id\" class=\"view\" title=\"Unblock\" data-toggle=\"tooltip\"><span class=\"badge badge-success\">Unblock</span></a>\n";
             
-            switch($row[4]) {
+        switch($row[4]) {
                 case 0:
                     $user->status = 'Blocked';
                     $user->actions .= $action_unblock;
@@ -56,14 +47,6 @@ function get_all_users() {
             // "EMP SALARY : {$row[2]} <br> ".
             // "--------------------------------<br>";
         }
-        mysqli_free_result($result);
-    }
-    //var_dump($users);
-    mysqli_close($con);
-    return $users;
-}
-
-
 ?>
 
 <!DOCTYPE html>
@@ -113,9 +96,11 @@ function get_all_users() {
                 </thead>
                 <tbody>
                     <?php
-                        $users = get_all_users();
+                        
+                        //users = get_all_users();
                         //var_dump($users);
                         foreach($users as $user) {
+                            //var_dump($user);
                             echo '<tr>';
                             echo '<td>'. $user->id .'</td>';
                             echo '<td>'. $user->name .'</td>';
@@ -132,3 +117,24 @@ function get_all_users() {
     </div>
 </body>
 </html>
+
+<script>  
+$(document).ready(function(){
+
+ setInterval(function(){
+  update_last_activity();
+ }, 5000);
+
+ function update_last_activity()
+ {
+  $.ajax({
+   url:"update_last_activity.php",
+   success:function()
+   {
+    
+   }
+  })
+ }
+ 
+});  
+</script>

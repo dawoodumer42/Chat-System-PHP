@@ -1,3 +1,9 @@
+.logout_button {
+
+    margin: 20px 20px 0px 0px;
+    text-align: right;
+}
+
 .login-form {
     width: 340px;
     margin: 50px auto;

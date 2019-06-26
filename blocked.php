@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Account Approval Pending</title>
+    <title>You are Blocked</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
@@ -28,11 +28,11 @@
                 Chat System                
             </h1>
             <h4 class="text-center">
-                Account Approval Pending               
+                Blocked !               
             </h4>       
             <hr/>
             <h4 class="text-info">
-                Your account is awaiting Approval. It might take upto 48 hours for Support to verify your identity. Please cotnact customer@support.com in case of any queries.
+                Your account has been blocked. Please cotnact customer@support.com in case of any queries.
             </h4>
             <!-- <div class="form-group">
                 <input name="code" type="text" class="form-control" placeholder="Activation Code" required="required">

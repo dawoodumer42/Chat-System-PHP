@@ -40,7 +40,7 @@ CREATE TABLE messages (
 CREATE TABLE user_activities (
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
-    stauts VARCHAR (20) NOT NULL,
+    stauts VARCHAR (20) NOT NULL DEFAULT 'Online',
     `time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );

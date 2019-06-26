@@ -1,82 +1,46 @@
 <?php
-	authorize('register.php');
+    include ('functions.php');
+    authorize();
+    
 	$error_message = "";
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 		
-		// establishing connection
-		$connection = new mysqli("localhost", "root", "", "chat_system");
-
-		if($connection->connect_error) {
-			die("Server error, try again later!");
-		}
-		
 		$mail_check = "SELECT id FROM users WHERE email = '" .$_POST["email"]. "'";
 		
-		$result = $connection->query($mail_check);
-		
-		if($result->num_rows > 0) {
-			
-			$error_message = "This email has already been registered.";
-			
+		$result = $conn->query($mail_check);		
+		if($result->num_rows > 0) {			
+			$error_message = "This email has already been registered.";			
 		}
 		else {
-			
-			
-
 			$code = password_hash(date('Y-m-d H:i:s'), PASSWORD_DEFAULT);
 			$encrypted_password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 			
-			// query to insert new value
 			$insertQuery = "INSERT INTO
 				users(email, password, name, activation_code)
 				VALUES('" . $_POST["email"] . "' , '" . $encrypted_password . 
 				"' , '" . $_POST["name"] . "' , '" .$code . "')";
 			
-			
-			
-			
-			if($connection->query($insertQuery) === true) {
-				
-				
-				$user_query = "SELECT id, status, type FROM users
+			if($conn->query($insertQuery) === true) {
+				$user_query = "SELECT id, email, status, type, activation_code FROM users
 					WHERE email = '" .$_POST["email"]. "'";
+				$query_res = $conn->query($user_query);
 				
-				$query_res = $connection->query($user_query);
-				
-				$row = $query_res->fetch_assoc();
-				
-				require_once "functions.php";
-				
-				
-				open_session($row["id"], $row["status"], $row["type"]);
-				
-				
-				echo $_SESSION["user_id"]; // = $row["id"];
-				echo $_SESSION["status"];  // = $row["status"];
-				echo $_SESSION["type"]; // = $row["type"];
-				
-				
-				//header('Location: welcome.php');
-				exit();
-				
+				$row = $query_res->fetch_assoc();				
+                open_session($row["id"], $row["email"], $row["type"],  $row["status"]);
+                send_activation_code($row["activation_code"], $row["email"]);
+
+                $query_activity = "INSERT INTO user_activities (user_id, time) VALUES ({$row['id']}, CURRENT_TIMESTAMP);";
+                $res = $conn->query($query_activity);
+                //echo $query_activity;
+				header('Location: verify.php');
 			}
 			else
 			{
-				
 				$error_message = "Something has gone wrong in the registration process.";
-				
 			}
 		}
-		
-		$connection->close();
-			
-			
-	
-
+		$conn->close();
 	}
-
-    
-
 ?>
 
 

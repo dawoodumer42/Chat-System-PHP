@@ -1,48 +1,32 @@
-
-
 <?php
-	
-	$error_message = "";
-	
-	session_start();
-	if(isset($_SESSION["user_id"])) {
-		
-		
-		header('Location: welcome.php');
-		exit();
-		
-	}
-	else {
-		
-		$conn = new mysqli("localhost", "root", "", "chat_system");
-		
-		if($conn->connect_error) {
-			
-			$error_message = "There is some server problem. Please, try again later!";
-			
-		}
-		else {
-			
-			$sql_query = "SELECT * FROM users WHERE email = '" . $_POST["email"] . "'";
-			
-			$res = $conn->query($sql_query);
-			
-			if($res->num_rows > 0) {
-				
-				
-			}
-			
-		}
-		
-	}
-	
-	
+	include ('functions.php');
+    authorize();
 
+	$error_message = "";	
+    
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        $user = get_user($_POST['email']);
+
+		if($user != null) {
+            $hash = $user["password"];
+
+            if(password_verify($_POST['password'], $hash))
+            {
+                open_session($user["id"], $user["email"], $user["type"],  $user["status"]);
+                header('Location: inbox.php');
+            }
+            else
+            {
+                $error_message = "Invalid Password.";
+            }
+        }
+        else{
+            $error_message = "Invalid Email Address.";
+        }
+	}
 ?>
 	
-  
 
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,7 +62,11 @@
             <div class="clearfix">
                 <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
                 <!-- <a href="#" class="pull-right">Forgot Password?</a> -->
-            </div>        
+            </div>     
+            <br/>
+            <p class="text-danger text-red" id="error">
+				<?php echo $error_message; ?>
+			</p>   
         </form>
         <p class="text-center"><a href="register.php">Create an Account</a></p>
     </div>
