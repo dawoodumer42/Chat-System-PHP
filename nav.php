@@ -16,7 +16,7 @@
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand -->
-  <a class="navbar-brand" href="inbox.php">Chat System</a>
+  <a class="navbar-brand" href="inbox.php"><?php echo $_SESSION['name'];?></a>
   
   <!-- Toggler/collapsibe Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">

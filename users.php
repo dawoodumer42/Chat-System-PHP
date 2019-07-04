@@ -15,17 +15,16 @@
         $action_approve = "<a href=\"approve.php?user_id=$user->id\" class=\"view\" title=\"Approve\" data-toggle=\"tooltip\"><span class=\"badge badge-info\">Approve</span></a>\n";
         $action_block = "<a href=\"block.php?user_id=$user->id\" class=\"view\" title=\"Danger\" data-toggle=\"tooltip\"><span class=\"badge badge-danger\">Block</span></a>\n";
         $action_unblock = "<a href=\"unblock.php?user_id=$user->id\" class=\"view\" title=\"Unblock\" data-toggle=\"tooltip\"><span class=\"badge badge-success\">Unblock</span></a>\n";
+        $action_verify = "<a href=\"verify_manual.php?user_id=$user->id\" class=\"view\" title=\"Verify\" data-toggle=\"tooltip\"><span class=\"badge badge-info\">Verify</span></a>\n";
             
         switch($row[4]) {
                 case 0:
                     $user->status = 'Blocked';
                     $user->actions .= $action_unblock;
-                        
                     break;
                 case 1:
                     $user->status = 'Active';
                     $user->actions .= $action_block;
-    
                     break;
                 case 2:
                     $user->status = 'Pending Approval';
@@ -34,6 +33,7 @@
                     break;
                 case 3:
                     $user->status = 'Email Not Verified';
+                    $user->actions .= $action_verify;
                     $user->actions .= $action_block;
                     break;
             }
@@ -60,6 +60,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="DataTables/datatables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="user.css"/>
+
 
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -80,7 +82,7 @@
             } );
         } )
     </script>
-    <div class="container-fluid bg-light">
+    <div class="container-fluid my-table">
             <br/>
             <table class="table table-bordered" id="example">
                 <thead>

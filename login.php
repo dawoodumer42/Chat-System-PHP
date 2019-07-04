@@ -12,7 +12,7 @@
 
             if(password_verify($_POST['password'], $hash))
             {
-                open_session($user["id"], $user["email"], $user["type"],  $user["status"]);
+                open_session($user["id"], $user["email"], $user["type"],  $user["status"], $user["name"]);
                 header('Location: inbox.php');
             }
             else

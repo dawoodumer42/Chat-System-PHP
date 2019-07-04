@@ -60,6 +60,7 @@ CREATE TABLE chat_room_users (
     user_id INT NOT NULL,
     added_by INT NOT NULL,
     joined_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_seen_message_id INT DEFAULT -1,
     type VARCHAR(15) NOT NULL DEFAULT 'User',
     FOREIGN KEY (chat_room_id) REFERENCES chat_rooms(id),
     FOREIGN KEY (user_id) REFERENCES users(id),
@@ -76,3 +77,15 @@ CREATE TABLE chat_room_messages (
     FOREIGN KEY (from_user_id) REFERENCES users(id),
     FOREIGN KEY (to_chat_room_id) REFERENCES chat_rooms(id)
 )
+
+-- CREATE TABLE room_last_activity (
+--     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+--     user_id INT NOT NULL,
+--     chat_room_id INT NOT NULL,
+--     last_seen_message_id INT DEFAULT -1,
+--     time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--     FOREIGN KEY (user_id) REFERENCES users(id),
+--     FOREIGN KEY (chat_room_id) REFERENCES chat_rooms(id),
+-- )
+
+--     FOREIGN KEY (last_seen_message_id) REFERENCES chat_room_messages(id)

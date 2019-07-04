@@ -1,0 +1,25 @@
+.my-table {
+	background-color: #25414d !important;
+}
+
+body {
+	background: #25414d !important;
+}
+table{
+	border: none !important;
+}
+table th {
+	color:#e8ebec;
+}
+table tr {
+	color: #333232;
+}
+
+input {
+	background: #aab4ba !important;
+	border: solid 2px gray !important;
+}
+
+select {
+	background: #aab4ba !important;
+}

@@ -21,12 +21,12 @@
 				"' , '" . $_POST["name"] . "' , '" .$code . "')";
 			
 			if($conn->query($insertQuery) === true) {
-				$user_query = "SELECT id, email, status, type, activation_code FROM users
+				$user_query = "SELECT id, name, email, status, type, activation_code FROM users
 					WHERE email = '" .$_POST["email"]. "'";
 				$query_res = $conn->query($user_query);
 				
 				$row = $query_res->fetch_assoc();				
-                open_session($row["id"], $row["email"], $row["type"],  $row["status"]);
+                open_session($row["id"], $row["email"], $row["type"],  $row["status"], $row["name"]);
                 send_activation_code($row["activation_code"], $row["email"]);
 
                 $query_activity = "INSERT INTO user_activities (user_id, time) VALUES ({$row['id']}, CURRENT_TIMESTAMP);";
