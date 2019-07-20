@@ -8,7 +8,7 @@
     $counts = [];
     $i = 0;
     foreach ($room_ids as $room_id) {
-  		$sql =  "SELECT COUNT(*) as count FROM chat_room_messages WHERE id > (SELECT last_seen_message_id FROM chat_room_users WHERE user_id = {$user_id} AND chat_room_id = {$room_id}) AND to_chat_room_id = {$room_id}";
+  		$sql =  "SELECT COUNT(*) as count FROM chat_room_messages WHERE id > (SELECT last_seen_message_id FROM chat_room_users WHERE user_id = {$user_id} AND chat_room_id = {$room_id}) AND to_chat_room_id = {$room_id} AND from_user_id != {$user_id}";
     	$res = $conn->query($sql);
 
     	$r = mysqli_fetch_assoc($res);
@@ -18,5 +18,4 @@
     }
 
 		print json_encode($counts);
-
 ?>

@@ -138,7 +138,7 @@ function get_all_rooms() {
 	}
 	else {
 		$id = $_SESSION['user_id'];
-		$sql="SELECT cr.id, cr.title FROM users u inner join chat_room_users cru on u.id = cru.user_id inner join chat_rooms cr on cru.chat_room_id = cr.id WHERE user_id = {$id};";
+		$sql="SELECT cr.id, cr.title, cru.type FROM users u inner join chat_room_users cru on u.id = cru.user_id inner join chat_rooms cr on cru.chat_room_id = cr.id WHERE user_id = {$id};";
 	}
 
 	$conn = $GLOBALS['conn'];
@@ -148,7 +148,7 @@ function get_all_rooms() {
 }
 
 function get_room_members($id) {
-	$sql = "SELECT cr.title, cr.description, cru.id as entry_id, u.id as user_id, u.name FROM chat_rooms cr left join chat_room_users cru on cr.id = cru.chat_room_id left join users u on cru.user_id = u.id WHERE cr.id = {$id};";
+	$sql = "SELECT cr.title, cr.description, cru.id as entry_id, u.id as user_id, u.name, cru.type FROM chat_rooms cr left join chat_room_users cru on cr.id = cru.chat_room_id left join (SELECT * FROM users WHERE type != 'Admin') u on cru.user_id = u.id WHERE cr.id = {$id};";
 
 	$conn = $GLOBALS['conn'];
 	$res = $conn->query($sql);
@@ -159,6 +159,7 @@ function get_room_members($id) {
 	//print(json_encode($users));
 	return $users;
 }
+
 
 function get_room_partners() {
 	$id = $_SESSION['user_id'];
@@ -254,7 +255,7 @@ function create_room($title, $desc, $users) {
 		$conn->query($sql);
 		
 	}
-	$sql ="INSERT INTO chat_room_users (user_id, chat_room_id, added_by) VALUES ({$id}, {$row_id}, {$id});";
+	$sql ="INSERT INTO chat_room_users (user_id, chat_room_id, added_by, type) VALUES ({$id}, {$row_id}, {$id}, 'Admin');";
 	$conn->query($sql);
 	//return $row_id;
 }
@@ -266,7 +267,7 @@ function update_room($room_id, $title, $desc, $users) {
 
 	$list = join(",",$users);
 	//foreach ($users as $user) {
-	$sql = "DELETE FROM chat_room_users WHERE chat_room_id = {$room_id} AND user_id NOT IN ({$list})";
+	$sql = "DELETE FROM chat_room_users WHERE chat_room_id = {$room_id} AND user_id NOT IN ({$list}) AND type = 'User'";
 	$conn->query($sql);
 
 	$sql = "UPDATE chat_rooms SET title = '{$title}', description = '{$desc}' WHERE id = {$room_id};";

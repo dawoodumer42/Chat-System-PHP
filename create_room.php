@@ -10,12 +10,12 @@ if(isset($_POST['title'])){
 	$users =  explode (",", $users);
 
 	if($type == 'create') {		
-		if(count($users) > 0 && $users[0] != "") {
+		//if(count($users) > 0 && $users[0] != "") {
 			create_room($title, $desc, $users);
 			header('Location: inbox.php');
-		}
-		else
-			echo "Error. Please add atleast 1 member to the room.";
+		//}
+		//else
+			//echo "Error. Please add atleast 1 member to the room.";
 	} else {
 		$room_id = $_POST['room_id'];
 		//print("Updating");

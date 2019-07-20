@@ -1,3 +1,7 @@
+.view_more {
+  text-align: center;
+}
+
 .notifcation {
         float: left !important;
     /* margin-right: 5px; */
@@ -237,7 +241,7 @@ background: #3d494d;
     height: 33px;
     position: absolute;
     right: 0;
-    top: 11px;
+    top: 17px;
     width: 33px;
   }
 
